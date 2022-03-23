@@ -102,11 +102,11 @@ function Lottery() {
           <TimerCard title="秒" time={seconds} />
         </Timer>
         {
-          isWorking
+          isWorking && countDownSeconds > 0
             ? (
               <LoadingContainer>
                 <Spinner size={60} />
-                <span>抽獎中...</span>
+                <span>抽獎倒數中...</span>
               </LoadingContainer>
             )
             : null
