@@ -13,7 +13,7 @@ export default function reducer(state = initState, action = '') {
     case actions.ADD_LOTTERY_WINNER:
       return {
         ...state,
-        lotteryUserList: lotteryUserList.filter((ele) => (
+        lotteryUserList: state.lotteryUserList.filter((ele) => (
           ele.id !== action.payload.lotteryWinner.id
         )),
         lotteryWinners: [

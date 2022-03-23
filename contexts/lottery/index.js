@@ -48,7 +48,7 @@ function Lottery() {
     setCountDownSeconds(newCountDownSecond);
     if (!countDownSeconds) setIsWorking(false);
     if (!newCountDownSecond && countDownSeconds) setIsDone(true);
-  }, 100);
+  });
 
   const setTimer = () => {
     setIsDone(false);

@@ -20,7 +20,7 @@ const LotteryContainer = styled(Box)`
 `;
 
 const TimerContainer = styled(Box)`
-  width: 300px;
+  width: 360px;
   display: flex;
   flex-direction: column;
   margin-right: 10px;
