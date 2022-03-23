@@ -8,7 +8,7 @@ const { mobile } = deviceSize;
 const LotteryContainer = styled(Box)`
   width: 100%;
   max-width: 600px;
-  min-height: 100vh;
+  min-height: calc(100vh - 50px);
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
@@ -54,7 +54,7 @@ const UserList = styled(Box)`
   width: 200px;
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  max-height: 100vh;
 
   @media ${mobile} {
     width: 95%;
@@ -63,7 +63,7 @@ const UserList = styled(Box)`
   }
 
   & > .user-list-content {
-    height: 100%;
+    max-height: 80vh;
     overflow: auto;
   }
 `;

@@ -17,6 +17,16 @@ const lotteryUserList = [
   { id: 16, name: '使用者16' },
   { id: 17, name: '使用者17' },
   { id: 18, name: '使用者18' },
+  { id: 19, name: '使用者19' },
+  { id: 20, name: '使用者20' },
+  { id: 21, name: '使用者21' },
+  { id: 22, name: '使用者22' },
+  { id: 23, name: '使用者23' },
+  { id: 24, name: '使用者24' },
+  { id: 25, name: '使用者25' },
+  { id: 26, name: '使用者26' },
+  { id: 27, name: '使用者27' },
+  { id: 28, name: '使用者28' },
 ];
 
 export default {
