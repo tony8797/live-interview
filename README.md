@@ -5,4 +5,5 @@
 `yarn` OR `npm install`
 
 ## DEMO
-https://live-interview.vercel.app/
+抽獎頁面：https://live-interview.vercel.app/ 
+得獎名單頁面：https://live-interview.vercel.app/winner
