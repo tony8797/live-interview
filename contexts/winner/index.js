@@ -1,20 +1,26 @@
-import { useRouter } from 'next/router';
-import { useSelector } from 'react-redux';
-// import Box from '@mui/material/Box';
-
+import { useDispatch, useSelector } from 'react-redux';
 import WinnerCard from '@/components/cards';
 import Button from '@/components/buttons';
+import lotteryActions from '@/redux/lottery/actions';
 import winnerStyle from '@/contexts/winner/index.style';
 
 const { WinnerContainer, WinnerList } = winnerStyle;
 
 function Lottery() {
-  const router = useRouter();
+  const dispatch = useDispatch();
   const { lotteryWinners = [] } = useSelector((state) => state.lottery);
 
   return (
     <WinnerContainer>
-      <Button onClick={() => router.push('/')} sx={{ width: '100px' }}>繼續抽獎</Button>
+      <Button
+        sx={{ width: '100px' }}
+        onClick={() => {
+          window.location.href = '/';
+          return true;
+        }}
+      >
+        繼續抽獎
+      </Button>
       <WinnerList>
         {
           lotteryWinners.length
@@ -26,6 +32,18 @@ function Lottery() {
             : null
         }
       </WinnerList>
+      {
+        lotteryWinners?.length
+          ? (
+            <Button
+              sx={{ width: '130px' }}
+              onClick={() => dispatch(lotteryActions.resetLotteryWinners())}
+            >
+              重置得獎名單
+            </Button>
+          )
+          : null
+      }
     </WinnerContainer>
   );
 }

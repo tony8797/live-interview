@@ -21,6 +21,12 @@ export default function reducer(state = initState, action = '') {
           action.payload.lotteryWinner,
         ],
       };
+    case actions.RESET_LOTTERY_WINNERS:
+      return {
+        ...state,
+        lotteryUserList,
+        lotteryWinners: [],
+      };
     default:
       return state;
   }
