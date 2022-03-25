@@ -7,8 +7,10 @@ Execute [`live-interview`](https://github.com/tony8797/live-interview) with [npm
 
 ```bash
 npm install
+npm run dev
 # or
 yarn 
+yarn dev
 ```
 
 ## DEMO
