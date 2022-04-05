@@ -4,26 +4,23 @@ import moment from 'moment';
 import Box from '@mui/material/Box';
 import Input from '@mui/material/Input';
 
+import Clock from '@/contexts/lottery/clock';
+
 import Button from '@/components/buttons';
-import TimerCard from '@/components/timers';
 import Spinner from '@/components/spinners';
 import WinnerCard from '@/components/cards';
 
-import useInterval from '@/hooks/useInterval';
-import timeUtil from '@/utils/timer';
 import lotteryActions from '@/redux/lottery/actions';
 import timerStyle from '@/contexts/lottery/timer.style';
 
-const { convertTime } = timeUtil;
 const {
   TimerContainer,
   SettingTimer,
-  Timer,
   LotteryWinnerContainer,
   LoadingContainer,
 } = timerStyle;
 
-function Lottery() {
+function Timer() {
   const dispatch = useDispatch();
   const { lotteryWinners = [], lotteryUserList = [] } = useSelector((state) => state.lottery);
   const [isWorking, setIsWorking] = useState(false);
@@ -31,15 +28,6 @@ function Lottery() {
   const [countDownMinutes, setCountDownMinutes] = useState(0);
   const [countDownSeconds, setCountDownSeconds] = useState(0);
   const [lotteryWinner, setLotteryWinner] = useState(null);
-
-  const { hours = 0, minutes = 0, seconds = 0 } = convertTime(countDownSeconds);
-
-  useInterval(() => {
-    const newCountDownSecond = countDownSeconds > 0 ? countDownSeconds - 1000 : 0;
-    setCountDownSeconds(newCountDownSecond);
-    if (!countDownSeconds) setIsWorking(false);
-    if (!newCountDownSecond && countDownSeconds) setIsDone(true);
-  });
 
   const setTimer = () => {
     setIsDone(false);
@@ -50,14 +38,14 @@ function Lottery() {
   };
 
   useEffect(() => {
-    if (!isDone || !isWorking || lotteryWinner) return;
+    if (!isDone || lotteryWinner) return;
 
     const random = parseInt(Math.random() * (lotteryUserList.length - 1), 10);
     setLotteryWinner(lotteryUserList[random]);
     dispatch(lotteryActions.addLotteryWinner({
       lotteryWinner: lotteryUserList[random],
     }));
-  }, [dispatch, isDone, lotteryWinner, isWorking, lotteryUserList, lotteryWinners]);
+  }, [dispatch, isDone, lotteryWinner, lotteryUserList, lotteryWinners]);
 
   return (
     <TimerContainer>
@@ -86,13 +74,15 @@ function Lottery() {
           </Button>
         </Box>
       </SettingTimer>
-      <Timer>
-        <TimerCard title="小時" time={hours} isShowDot />
-        <TimerCard title="分鐘" time={minutes} isShowDot />
-        <TimerCard title="秒" time={seconds} />
-      </Timer>
+      <Clock
+        countDownSeconds={countDownSeconds}
+        isWorking={isWorking}
+        setCountDownSeconds={setCountDownSeconds}
+        setIsWorking={setIsWorking}
+        setIsDone={setIsDone}
+      />
       {
-        isWorking && countDownSeconds > 0
+        countDownSeconds > 0
           ? (
             <LoadingContainer>
               <Spinner size={60} />
@@ -130,4 +120,4 @@ function Lottery() {
   );
 }
 
-export default Lottery;
+export default Timer;
